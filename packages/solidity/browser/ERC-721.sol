@@ -52,3 +52,13 @@ interface ERC721 {
     address _operator
   ) public view returns (bool);
 }
+
+contract ERC721Implementation is ERC721 {
+  mapping(uint256 => address) tokenOwner;
+  mapping(address => uint256) ownedTokenCount;
+
+  function mint(address _to, uint256 _tokenId) public {
+    tokenOwner[_tokenId] = _to;
+    ownedTokenCount[_to] += 1;
+  }
+}

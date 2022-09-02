@@ -67,6 +67,24 @@ contract ERC721Implementation is ERC721 {
   }
 
   function ownerOf(uint256 _tokenId) public view returns (address) {
-	return tokenOwner[_tokenId];
+	  return tokenOwner[_tokenId];
   }
+
+  function transferFrom(
+    address _from,
+    address _to,
+    uint256 _tokenId
+  ) public {
+    address owner = ownerOf(_tokenId);
+      require(msg.sender == owner);
+      require(_from != address(0));
+      require(_to != address(0));
+
+      ownedTokenCount[_from] -= 1;
+      tokenOwner[_tokenId] = address(0);
+
+      ownedTokenCount[_to] += 1;
+      tokenOwner[_tokenId] = _to;
+    }
+
 }

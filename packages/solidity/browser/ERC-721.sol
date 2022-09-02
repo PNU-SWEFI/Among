@@ -65,4 +65,8 @@ contract ERC721Implementation is ERC721 {
   function balanceOf(address _owner) public view returns (uint256) {
     return ownedTokenCount[_owner];
   }
+
+  function ownerOf(uint256 _tokenId) public view returns (address) {
+	return tokenOwner[_tokenId];
+  }
 }
